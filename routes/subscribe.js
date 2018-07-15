@@ -1,9 +1,9 @@
 "use strict";
 
 module.exports = (req, res) => {
-  req.socket.setTimeout(Number.MAX_VALUE);
+  req.socket.setTimeout(2147483647);
 
-  req.globalManager.on("numberConverted", romainNumber => {
+  req.app.get("globalManager").on("numberConverted", romainNumber => {
     res.write("data: " + romainNumber);
     res.write("\n\n");
   });

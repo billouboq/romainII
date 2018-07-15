@@ -7,7 +7,7 @@ module.exports = (req, res) => {
 
   // emit that we have converted a number
   // then subscribe route will deal with the rest
-  req.globalManager.emit("numberConverted", romainNumber);
+  req.app.get("globalManager").emit("numberConverted", romainNumber);
 
   res.end();
 };
