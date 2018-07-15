@@ -1,7 +1,7 @@
 "use strict";
 
 const request = require("supertest");
-const server = require("../../server");
+const { server } = require("../../server");
 
 describe("Test convertNumber route", () => {
   test("It should return a romain number", async done => {

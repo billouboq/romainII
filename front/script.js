@@ -9,23 +9,31 @@ const config = {
 };
 
 // get romain number
-const getRomainNumber = number => {
-  return fetch(config.server + "/convertNumber", {
+const StreamSource = new EventSource(config.server + "/subscribe");
+
+// this is where we have our romain number converted
+StreamSource.addEventListener(
+  "message",
+  event => {
+    result.innerHTML = event.data;
+    btn.disabled = false;
+  },
+  false
+);
+
+// ask for romain number
+const askForConversion = number =>
+  fetch(config.server + "/askForConversion", {
     method: "post",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ number }),
-  })
-    .then(resp => resp.json())
-    .then(json => json.result);
-};
+  });
 
 // listeners
 btn.addEventListener("click", async () => {
-  result.innerHTML = await getRomainNumber(input.value);
-
-  // reset input
-  input.value = null;
+  await askForConversion(input.value);
+  btn.disabled = true;
 });

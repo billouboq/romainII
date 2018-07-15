@@ -10,4 +10,6 @@ const server = express();
 initMiddlewares(server);
 initRoutes(server);
 
-module.exports = server;
+module.exports = {
+  server,
+};

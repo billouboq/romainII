@@ -4,5 +4,10 @@ const convertNumberToRomainOne = require("../services/convertNumberToRomainOne")
 
 module.exports = (req, res) => {
   const romainNumber = convertNumberToRomainOne(req.body.number);
-  res.json({ result: romainNumber });
+
+  // emit that we have converted a number
+  // then subscribe route will deal with the rest
+  req.globalManager.emit("numberConverted", romainNumber);
+
+  res.end();
 };

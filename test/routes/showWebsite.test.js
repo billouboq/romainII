@@ -3,7 +3,7 @@
 const fs = require("fs-extra");
 const path = require("path");
 const request = require("supertest");
-const server = require("../../server");
+const { server } = require("../../server");
 
 const htmlFile = path.resolve(__dirname + "../../../front/index.html");
 
